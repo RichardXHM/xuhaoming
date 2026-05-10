@@ -3,428 +3,657 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>徐浩铭 | 个人简历 - AI硬件产品经理 & 资深运营</title>
+    <title>徐浩铭 - 简历 | AI硬件产品经理 & 前端工程师</title>
     <style>
         :root {
-            --primary: #6366f1;
-            --secondary: #a855f7;
-            --accent: #22d3ee;
-            --bg: #ffffff;
-            --text: #1f2937;
-            --subtext: #4b5563;
-            --card-bg: #f9fafb;
-            --border: #e5e7eb;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            /* 科技玄学风 深色模式 (默认) */
+            --bg-color: #050505;
+            --text-main: #e0e0e0;
+            --text-muted: #888;
+            --primary: #00ff41; /* Matrix Green */
+            --secondary: #9d00ff; /* Cyber Purple */
+            --accent: #ffd700; /* Metaphysical Gold */
+            --card-bg: rgba(10, 10, 12, 0.75);
+            --card-border: rgba(0, 255, 65, 0.2);
+            --nav-bg: rgba(5, 5, 5, 0.85);
+            --glass-blur: blur(12px);
+            --font-sys: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            --font-mono: "Consolas", "Courier New", monospace;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg: #030712;
-                --text: #f3f4f6;
-                --subtext: #9ca3af;
-                --card-bg: #111827;
-                --border: #374151;
-            }
+        [data-theme="light"] {
+            /* 浅色模式 */
+            --bg-color: #f4f4f9;
+            --text-main: #222;
+            --text-muted: #555;
+            --primary: #008f11;
+            --secondary: #7000cc;
+            --accent: #d4af37;
+            --card-bg: rgba(255, 255, 255, 0.85);
+            --card-border: rgba(0, 143, 17, 0.2);
+            --nav-bg: rgba(244, 244, 249, 0.9);
         }
 
-        body.dark-mode {
-            --bg: #030712;
-            --text: #f3f4f6;
-            --subtext: #9ca3af;
-            --card-bg: #111827;
-            --border: #374151;
-        }
-        
-        body.light-mode {
-            --bg: #ffffff;
-            --text: #1f2937;
-            --subtext: #4b5563;
-            --card-bg: #f9fafb;
-            --border: #e5e7eb;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
+            font-family: var(--font-sys);
+            background-color: var(--bg-color);
+            color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
-            transition: var(--transition);
+            transition: background-color 0.3s ease;
         }
 
-        /* Mystical Tech Background */
-        .bg-canvas {
+        ::selection { background: var(--primary); color: #000; }
+
+        /* 矩阵背景画布 */
+        #matrix-canvas {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.05) 0%, transparent 50%);
-            opacity: 0.6;
+            pointer-events: none;
         }
 
-        /* Header & Nav */
-        header {
-            position: fixed;
-            top: 0; width: 100%;
-            background: rgba(var(--bg), 0.8);
-            backdrop-filter: blur(12px);
-            z-index: 100;
-            border-bottom: 1px solid var(--border);
-        }
-
-        nav {
+        /* 布局容器 */
+        .container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 0.75rem 1.25rem;
+            padding: 0 20px;
+        }
+
+        /* 导航栏 */
+        nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            background: var(--nav-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--card-border);
+            z-index: 1000;
+            padding: 15px 0;
+            transition: var(--transition);
+        }
+        .nav-inner {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
-
-        .nav-brand { font-weight: 800; font-size: 1.25rem; letter-spacing: -0.025em; background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        .nav-actions { display: flex; gap: 1rem; align-items: center; }
-        
-        .btn-icon {
-            background: none; border: 1px solid var(--border); color: var(--text);
-            padding: 0.5rem; border-radius: 0.5rem; cursor: pointer; transition: var(--transition);
+        .nav-brand {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            letter-spacing: 2px;
         }
-        .btn-icon:hover { background: var(--border); }
+        .nav-links { display: flex; gap: 20px; align-items: center; }
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        .nav-links a:hover { color: var(--primary); }
+        .action-btn {
+            background: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: var(--font-sys);
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .action-btn:hover { background: var(--primary); color: #000; }
 
-        /* Container */
-        main { max-width: 800px; margin: 5rem auto 2rem; padding: 0 1.25rem; }
+        /* 通用卡片 (Glassmorphism) */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: var(--transition);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        }
+        .glass-card:hover { border-color: var(--primary); transform: translateY(-3px); }
 
-        /* Hero Section */
-        .hero { text-align: center; padding: 3rem 0; animation: fadeIn 0.8s ease-out; }
-        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
-        .hero p { color: var(--subtext); max-width: 500px; margin: 0 auto 1.5rem; }
-        
-        .badge-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; }
+        /* Section 标题 */
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title::before {
+            content: "/>";
+            color: var(--primary);
+            font-family: var(--font-mono);
+        }
+
+        /* Hero 区域 */
+        #hero { padding-top: 100px; }
+        .hero-content { display: flex; gap: 40px; align-items: center; }
+        .hero-avatar {
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            padding: 4px;
+            background: #000;
+            flex-shrink: 0;
+        }
+        .hero-avatar img, .hero-avatar svg {
+            width: 100%; height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background: var(--nav-bg);
+        }
+        .hero-info h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: -webkit-linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-info p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 15px; }
+        .hero-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
         .badge {
-            padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 500;
-            background: var(--card-bg); border: 1px solid var(--border); color: var(--primary);
+            background: rgba(0, 255, 65, 0.1);
+            color: var(--primary);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(0, 255, 65, 0.3);
+            font-family: var(--font-mono);
         }
+        .badge.accent { border-color: var(--secondary); color: #fff; background: rgba(157, 0, 255, 0.2); }
+        .contact-group { display: flex; gap: 15px; }
 
-        /* Section Styling */
-        section { margin-bottom: 4rem; scroll-margin-top: 6rem; }
-        h2 { font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
-        h2::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-
-        /* Highlights Grid */
-        .grid-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
-        .stat-card {
-            background: var(--card-bg); border: 1px solid var(--border); padding: 1.5rem; border-radius: 1rem;
-            text-align: center; transition: var(--transition); position: relative; overflow: hidden;
+        /* 亮点与标签栏 */
+        .tabs { display: flex; gap: 10px; border-bottom: 1px solid var(--card-border); margin-bottom: 20px; overflow-x: auto; scrollbar-width: none; }
+        .tabs::-webkit-scrollbar { display: none; }
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 1rem;
+            border-bottom: 2px solid transparent;
+            transition: var(--transition);
+            white-space: nowrap;
         }
-        .stat-card:hover { transform: translateY(-5px); border-color: var(--primary); }
-        .stat-val { display: block; font-size: 1.75rem; font-weight: 800; color: var(--primary); }
-        .stat-label { font-size: 0.875rem; color: var(--subtext); }
+        .tab-btn[aria-selected="true"] { color: var(--primary); border-bottom-color: var(--primary); font-weight: bold; }
+        .tab-panel { display: none; animation: fadeIn 0.4s ease; }
+        .tab-panel.active { display: block; }
 
-        /* Tabs Interface */
-        .tabs-container { margin-bottom: 1.5rem; }
-        .tabs-list {
-            display: flex; gap: 0.5rem; border-bottom: 1px solid var(--border);
-            padding-bottom: 0.5rem; overflow-x: auto;
+        /* 经历列表 */
+        .timeline-item { position: relative; padding-left: 20px; border-left: 2px solid var(--card-border); margin-bottom: 25px; }
+        .timeline-item::before {
+            content: "";
+            position: absolute; left: -6px; top: 5px;
+            width: 10px; height: 10px;
+            border-radius: 50%;
+            background: var(--primary);
+            box-shadow: 0 0 10px var(--primary);
         }
-        .tab-trigger {
-            padding: 0.5rem 1rem; border: none; background: none; color: var(--subtext);
-            cursor: pointer; font-weight: 600; white-space: nowrap; transition: var(--transition);
-            border-radius: 0.5rem;
+        .timeline-header { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; flex-wrap: wrap;}
+        .timeline-title { font-size: 1.2rem; font-weight: bold; color: var(--text-main); }
+        .timeline-subtitle { color: var(--accent); font-size: 0.95rem; margin-right: 15px; }
+        .timeline-date { font-family: var(--font-mono); color: var(--text-muted); font-size: 0.9rem; }
+        .timeline-content ul { padding-left: 20px; color: var(--text-muted); }
+        .timeline-content li { margin-bottom: 6px; }
+
+        /* 项目卡片 Grid */
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 20px;
+            transition: var(--transition);
         }
-        .tab-trigger.active { background: var(--primary); color: white; }
-        .tab-content { display: none; padding-top: 1.5rem; animation: slideUp 0.4s ease-out; }
-        .tab-content.active { display: block; }
+        .project-card:hover { border-color: var(--secondary); background: rgba(157, 0, 255, 0.05); }
+        .project-title { font-size: 1.1rem; font-weight: bold; margin-bottom: 10px; color: var(--text-main); }
+        .project-desc { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px; }
 
-        /* Experience/Project Card */
-        .exp-item {
-            position: relative; padding-left: 1.5rem; border-left: 2px solid var(--border);
-            margin-bottom: 2rem; transition: var(--transition);
-        }
-        .exp-item:hover { border-left-color: var(--primary); }
-        .exp-dot {
-            position: absolute; left: -7px; top: 0; width: 12px; height: 12px;
-            background: var(--bg); border: 2px solid var(--primary); border-radius: 50%;
-        }
-        .exp-header { display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 0.5rem; }
-        .exp-title { font-weight: 700; color: var(--text); }
-        .exp-meta { font-size: 0.875rem; color: var(--subtext); }
-        .exp-desc { font-size: 0.9375rem; color: var(--subtext); margin-top: 0.5rem; }
-        .exp-desc li { margin-left: 1.25rem; margin-bottom: 0.25rem; }
+        /* 技能矩阵 */
+        .skill-group { margin-bottom: 20px; }
+        .skill-group h4 { margin-bottom: 10px; color: var(--accent); font-weight: normal; }
+        .skill-bar-container { background: rgba(255,255,255,0.1); height: 6px; border-radius: 3px; margin-bottom: 15px; overflow: hidden;}
+        .skill-bar { height: 100%; background: linear-gradient(90deg, var(--primary), var(--secondary)); border-radius: 3px; }
 
-        /* Skill Grid */
-        .skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
-        .skill-category h4 { font-size: 0.9rem; color: var(--primary); text-transform: uppercase; margin-bottom: 0.75rem; }
-        .skill-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        /* 页脚 */
+        footer { text-align: center; padding: 30px 0; color: var(--text-muted); font-size: 0.9rem; border-top: 1px solid var(--card-border); margin-top: 40px; }
 
-        /* Footer */
-        footer { text-align: center; padding: 4rem 0 2rem; border-top: 1px solid var(--border); font-size: 0.875rem; color: var(--subtext); }
+        /* 动画 */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Animations */
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Print Style */
+        /* 打印样式 */
         @media print {
-            header, .btn-icon, .tabs-list, footer { display: none !important; }
-            body { background: white; color: black; font-size: 10pt; }
-            main { margin-top: 0; }
-            .tab-content { display: block !important; opacity: 1 !important; }
-            .exp-item { page-break-inside: avoid; }
-            section { margin-bottom: 1.5rem; }
+            body { background: #fff !important; color: #000 !important; }
+            #matrix-canvas, nav, .no-print { display: none !important; }
+            .container { max-width: 100%; padding: 0; }
+            .glass-card { box-shadow: none; border: 1px solid #ccc; background: transparent; break-inside: avoid; margin-bottom: 20px; padding: 20px;}
+            * { color: #000 !important; text-shadow: none !important; }
+            .badge { border: 1px solid #666; color: #333 !important; }
+            #hero { padding-top: 0; }
+            a { text-decoration: none; color: #000; }
+            .timeline-item { border-left-color: #333; }
+            .timeline-item::before { background: #333; box-shadow: none; }
         }
 
-        /* Scroll Top */
-        #scrollTop {
-            position: fixed; bottom: 2rem; right: 2rem; display: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .hero-content { flex-direction: column; text-align: center; }
+            .hero-avatar { margin: 0 auto; }
+            .contact-group { justify-content: center; }
+            .nav-links { display: none; /* 移动端精简导航 */ }
+            .nav-inner { justify-content: center; position: relative; }
+            .theme-toggle-wrapper { position: absolute; right: 0; }
         }
+
+        /* 辅助类 */
+        .mt-2 { margin-top: 20px; }
+        .flex-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
     </style>
 </head>
 <body>
-    <div class="bg-canvas" id="canvas"></div>
-    
-    <header>
-        <nav>
-            <div class="nav-brand">徐浩铭</div>
-            <div class="nav-actions">
-                <button class="btn-icon" onclick="toggleTheme()" title="切换主题">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-                </button>
-                <button class="btn-icon" onclick="window.print()" title="打印 PDF">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-                </button>
-            </div>
-        </nav>
-    </header>
 
-    <main id="app">
-        <!-- JS will render content here -->
-    </main>
+    <canvas id="matrix-canvas"></canvas>
 
-    <button id="scrollTop" class="btn-icon" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
-    </button>
+    <div id="app">
+    </div>
 
-    <footer>
-        <p>&copy; 2024 徐浩铭. Updated May 2024. Created with Vanilla JS.</p>
-    </footer>
-
-    <script>
-        const resume = {
+<script>
+    // ---------------------------------------------------------
+    // 1. 数据配置 (模拟 API 响应或本地数据)
+    // ---------------------------------------------------------
+    const resumeData = {
+        personal: {
             name: "徐浩铭",
-            title: "AI 硬件产品经理 | 资深新媒体运营",
-            summary: "24岁，黑龙江科技大学本科毕业。现任浙江湃启科技有限公司AI硬件产品经理，擅长结合硬核技术背景与敏锐的内容嗅觉，驱动AI应用落地。具备从0到1的新媒体运营与商务活动策划能力。",
-            contact: {
-                phone: "13796576266",
-                email: "526256317@qq.com",
-                location: "浙江 / 杭州"
-            },
-            highlights: [
-                { val: "3.6/4.0", label: "专业绩点" },
-                { val: "10k+", label: "社群运营规模" },
-                { val: "9/120", label: "专业排名" },
-                { val: "AI+", label: "硬件落地经验" }
-            ],
-            experience: {
-                work: [
-                    {
-                        company: "浙江湃启科技有限公司",
-                        role: "AI 硬件产品经理",
-                        date: "2024.03 - 至今",
-                        desc: [
-                            "负责公司AI硬件产品的规划与定义，对齐市场需求与技术可行性",
-                            "兼任新媒体运营主管，通过内容矩阵提升品牌声量及技术认知度",
-                            "主导商务对接与大型活动，成功拓展多个行业合作伙伴"
-                        ]
-                    },
-                    {
-                        company: "树成林教育科技有限公司",
-                        role: "新媒体运营 (实习)",
-                        date: "2023.07 - 2023.08",
-                        desc: [
-                            "全链路负责售前咨询与成交，精准解析课程体系，优化备考路径",
-                            "通过精细化运营，有效提升用户转化率与课程成交效率",
-                            "处理售后反馈，归纳各阶段学习痛点，反哺课程内容迭代"
-                        ]
-                    }
-                ],
-                campus: [
-                    {
-                        company: "黑龙江科技大学 - 校科协",
-                        role: "人工智能协会会长",
-                        date: "2022.09 - 2024.09",
-                        desc: [
-                            "负责协会公众号运营，获评校内“最佳协会公众号”",
-                            "组织多次校级科技竞赛，负责硬件调试与软件协作管理",
-                            "管理勤工助学部门公众号，策划多场公益及抗疫志愿者活动"
-                        ]
-                    }
-                ]
-            },
-            projects: [
+            age: 24,
+            title: "AI硬件产品经理 / 前端工程师 / 运营",
+            emailUser: "526256317",
+            emailDomain: "qq.com",
+            phone: "13796576266",
+            summary: "具备“玄学+科技”双重敏锐度的复合型人才。扎实测控与仪器硬件基础，深谙AI大模型应用与前端开发。擅长跨界整合，从AI硬件产品规划到零代码平台搭建，再到全网矩阵流量变现，拥有从0到1的完整闭环实战经验。自驱力极强，情绪稳定，终身成长者。",
+            tags: ["AI硬件产品", "大模型应用开发", "前端/小程序", "社群矩阵运营", "测控技术", "玄学+科技创新"]
+        },
+        education: [
+            {
+                school: "黑龙江科技大学",
+                period: "2021.09 - 2025.06",
+                major: "测控技术与仪器 | 本科",
+                gpa: "绩点: 3.6/4.0 | 排名: 9/120",
+                courses: "嵌入式原理96, 单片机原理94, 模拟电子93, 数字电子91",
+                certs: "四级524, 六级503, 3D打印证书, 计算机证书, 普通话证书"
+            }
+        ],
+        experience: {
+            work: [
                 {
-                    name: "AI 零代码应用生成平台",
-                    tech: "AI Agent / 可视化架构",
-                    date: "2023.07 - 2024.03",
-                    desc: "协助开发多种模式应用生成、持久化对话记忆等核心功能。"
+                    company: "浙江湃启科技有限公司",
+                    role: "AI硬件产品经理",
+                    period: "2026.05 - 至今",
+                    desc: [
+                        "负责AI硬件产品线规划与落地实施，结合大模型技术探索智能硬件新场景。",
+                        "统筹新媒体运营矩阵，推动品牌IP化与内容全域分发。",
+                        "负责商务接待与行业活动参展，拓展上下游生态合作关系。"
+                    ]
                 },
                 {
-                    name: "AI 爆款文章创作平台",
-                    tech: "多模态生成 / 工作流编排",
-                    date: "2023.07 - 2024.03",
-                    desc: "基于多智能体协作，实现几分钟生成配图丰富的专业文章。"
-                },
-                {
-                    name: "油田自动抽油系统 (互联网+)",
-                    tech: "嵌入式 / 自动控制",
-                    date: "竞赛项目",
-                    desc: "获省级三等奖，负责策划书编写、PPT制作及部分硬件测试。"
+                    company: "鱼鸟网络科技有限公司",
+                    role: "AI项目协助创作者 (B站八十万粉博主鱼皮团队)",
+                    period: "2025.07 - 2026.03",
+                    desc: [
+                        "负责AI领域流程内容创作，涵盖选题策划、资料研究、图文撰写，将复杂AI概念转化为通俗内容，降本增效。",
+                        "紧跟全球AI动态挖掘热点，打造差异化内容标签，持续优化内容转化率与阅读量。",
+                        "协助剪辑团队高效协作，确保视频内容准确呈现AI技术创作思路。"
+                    ]
                 }
             ],
-            skills: [
-                { category: "技术架构", items: ["嵌入式系统", "单片机开发", "AI Agent 编排", "Vibe Coding"] },
-                { category: "产品运营", items: ["内容策略", "商务对接", "用户增长", "活动策划"] },
-                { category: "工具栈", items: ["Python", "C Language", "Product Management Tools", "AI Workflow"] }
+            intern: [
+                {
+                    company: "树成林教育科技有限公司",
+                    role: "新媒体运营 (实习)",
+                    period: "2023.07 - 2023.08",
+                    desc: [
+                        "承接学生售前咨询，精准解答课程体系与备考规划，促成课程成交。",
+                        "负责售中开通与学习路径指引，日常运营私域社群，提炼学生痛点反哺教务团队。",
+                        "撰写符合团队风格的朋友圈文案素材，提升用户粘性与转化率。"
+                    ]
+                }
             ],
-            education: {
-                school: "黑龙江科技大学",
-                major: "测控技术与仪器 (本科)",
-                date: "2021.09 - 2025.06",
-                awards: ["CET-4 (524)", "CET-6 (503)", "3D打印证书", "计算机等级证书"]
+            campus: [
+                {
+                    company: "黑龙江科技大学 - 校科协 / 虚拟仪器实验室",
+                    role: "人工智能协会分会长 / 实验室负责人",
+                    period: "2022.09 - 2024.09",
+                    desc: [
+                        "担任AI协会分会长，负责公众号运营，获评校最佳协会公众号。",
+                        "担任勤工助学部长，组织抗疫与送温暖等大型志愿活动。",
+                        "担任虚拟仪器实验室负责人，协助指导学生参与专业竞赛与实验。"
+                    ]
+                }
+            ]
+        },
+        projects: [
+            {
+                name: "AI与命理术数结合产品矩阵",
+                tech: ["前端开发", "AI大模型", "社群运营"],
+                desc: "参与制作AI结合命理的网站/软件/小程序。负责前端界面与交互设计，实现流畅体验。独立负责付费粉丝社群运营，累计运营数十个社群及数千名高净值用户。"
+            },
+            {
+                name: "程序员鱼皮 AI零代码应用生成平台",
+                tech: ["AI开发实战", "后端架构", "可视化编排"],
+                desc: "协助开发平台核心功能，支持多种模式应用生成、可视化修改、持久化记忆及一键部署，极大降低开发者构建AI应用的门槛。"
+            },
+            {
+                name: "程序员鱼皮 AI爆款文章与导航平台",
+                tech: ["多智能体协作", "多模态生成", "Vibe Coding"],
+                desc: "参与AI智能体多模态内容生成平台开发，实现分钟级图文成片。负责AI导航网站Vibe Coding零基础教程板块规划建设。"
+            },
+            {
+                name: "自媒体流量主矩阵变现项目",
+                tech: ["内容运营", "矩阵变现", "私域陪跑"],
+                desc: "打造公众号矩阵，多篇文章阅读破万，单篇广告收入过百。作为社群助教，陪跑指导十几位学员完成从0到1的流量主矩阵变现闭环。"
             }
-        };
-
-        function render() {
-            const app = document.getElementById('app');
-            app.innerHTML = `
-                <section class="hero">
-                    <h1>${resume.name}</h1>
-                    <div class="badge-group">
-                        <span class="badge">${resume.title}</span>
-                    </div>
-                    <p>${resume.summary}</p>
-                    <div class="badge-group">
-                        <span class="badge" style="cursor:pointer" onclick="copyEmail()">${resume.contact.email}</span>
-                        <span class="badge">${resume.contact.phone}</span>
-                        <span class="badge">${resume.contact.location}</span>
-                    </div>
-                </section>
-
-                <section>
-                    <div class="grid-stats">
-                        ${resume.highlights.map(h => `
-                            <div class="stat-card">
-                                <span class="stat-val">${h.val}</span>
-                                <span class="stat-label">${h.label}</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                </section>
-
-                <section id="experience">
-                    <h2>工作与实习</h2>
-                    <div class="tabs-container">
-                        <div class="tabs-list">
-                            <button class="tab-trigger active" onclick="switchTab(event, 'work')">职业经历</button>
-                            <button class="tab-trigger" onclick="switchTab(event, 'campus')">校园实践</button>
-                        </div>
-                        <div id="work" class="tab-content active">
-                            ${resume.experience.work.map(renderExp).join('')}
-                        </div>
-                        <div id="campus" class="tab-content">
-                            ${resume.experience.campus.map(renderExp).join('')}
-                        </div>
-                    </div>
-                </section>
-
-                <section id="projects">
-                    <h2>核心项目</h2>
-                    ${resume.projects.map(p => `
-                        <div class="exp-item">
-                            <div class="exp-dot"></div>
-                            <div class="exp-header">
-                                <span class="exp-title">${p.name}</span>
-                                <span class="exp-meta">${p.date}</span>
-                            </div>
-                            <div class="exp-meta" style="color: var(--primary)">${p.tech}</div>
-                            <div class="exp-desc">${p.desc}</div>
-                        </div>
-                    `).join('')}
-                </section>
-
-                <section id="skills">
-                    <h2>能力矩阵</h2>
-                    <div class="skill-grid">
-                        ${resume.skills.map(s => `
-                            <div class="skill-category">
-                                <h4>${s.category}</h4>
-                                <div class="skill-list">
-                                    ${s.items.map(item => `<span class="badge">${item}</span>`).join('')}
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </section>
-
-                <section id="edu">
-                    <h2>教育背景</h2>
-                    <div class="exp-item">
-                        <div class="exp-dot"></div>
-                        <div class="exp-header">
-                            <span class="exp-title">${resume.education.school}</span>
-                            <span class="exp-meta">${resume.education.date}</span>
-                        </div>
-                        <div class="exp-meta">${resume.education.major}</div>
-                        <div class="exp-desc">
-                            荣誉/证书：${resume.education.awards.join(' / ')}
-                        </div>
-                    </div>
-                </section>
-            `;
+        ],
+        competitions: [
+            "互联网+大学生创新创业大赛 省级三等奖（羽毛球自动回收系统 - 软硬件调试/策划）",
+            "互联网+大学生创新创业大赛 省级三等奖（黑金科技·油田自动抽油系统 - 仿真/策划）",
+            "首届中国智能芯片杯 国家级三等奖（捍卫者微型穿墙探测仪 - 决赛路演/策划）"
+        ],
+        skills: {
+            "AI与编程": { val: 90, text: "熟练运用 ChatGPT/Claude 生成与搭建架构。熟悉AI工具辅助Web/小程序前端开发。" },
+            "嵌入式与硬件": { val: 85, text: "掌握 AT89C51/STM32, 嵌入式ARM/FPGA/Linux。熟练使用 KEIL, SPICE, Altium Designer, 嘉立创EDA。" },
+            "产品与运营": { val: 92, text: "具备强悍的私域运营、活动策划、爆款内容拆解及自媒体矩阵孵化能力。十点读书千万粉大号投稿10w+。" }
         }
+    };
 
-        function renderExp(exp) {
-            return `
-                <div class="exp-item">
-                    <div class="exp-dot"></div>
-                    <div class="exp-header">
-                        <span class="exp-title">${exp.company}</span>
-                        <span class="exp-meta">${exp.date}</span>
+    // ---------------------------------------------------------
+    // 2. 渲染核心逻辑
+    // ---------------------------------------------------------
+    function initApp() {
+        const app = document.getElementById('app');
+        
+        // 占位头像SVG (科技玄学极简感)
+        const avatarSvg = `
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="48" fill="#111" stroke="var(--primary)" stroke-width="2"/>
+                <path d="M50 20 L80 40 L80 70 L50 90 L20 70 L20 40 Z" fill="none" stroke="var(--secondary)" stroke-width="2" opacity="0.8"/>
+                <circle cx="50" cy="50" r="15" fill="var(--primary)" opacity="0.3"/>
+                <text x="50" y="55" font-family="monospace" font-size="16" fill="var(--primary)" text-anchor="middle">AI</text>
+            </svg>
+        `;
+
+        app.innerHTML = `
+            <nav class="no-print">
+                <div class="container nav-inner">
+                    <a href="#" class="nav-brand">XU.HAOMING_</a>
+                    <div class="nav-links">
+                        <a href="#experience">经历</a>
+                        <a href="#projects">项目</a>
+                        <a href="#skills">技能</a>
                     </div>
-                    <div class="exp-meta" style="font-weight: 600;">${exp.role}</div>
-                    <ul class="exp-desc">
-                        ${exp.desc.map(d => `<li>${d}</li>`).join('')}
+                    <div class="theme-toggle-wrapper flex-wrap" style="align-items:center;">
+                        <button class="action-btn" onclick="toggleTheme()">☯ 模式切换</button>
+                        <button class="action-btn" onclick="window.print()">🖨️ 打印PDF</button>
+                    </div>
+                </div>
+            </nav>
+
+            <main class="container">
+                <section id="hero" class="glass-card">
+                    <div class="hero-content">
+                        <div class="hero-avatar">
+                            ${avatarSvg}
+                        </div>
+                        <div class="hero-info">
+                            <h1>${resumeData.personal.name}</h1>
+                            <p>${resumeData.personal.title} | ${resumeData.personal.age}岁 | 统招本科</p>
+                            <div class="hero-tags">
+                                ${resumeData.personal.tags.map(t => `<span class="badge ${t.includes('AI') ? 'accent' : ''}">${t}</span>`).join('')}
+                            </div>
+                            <p style="margin-bottom:20px; text-align:justify;">${resumeData.personal.summary}</p>
+                            <div class="contact-group no-print">
+                                <button class="action-btn" onclick="copyEmail()">✉️ 复制邮箱</button>
+                                <a href="tel:${resumeData.personal.phone}" class="action-btn">📞 拨打电话</a>
+                            </div>
+                            <div style="display:none;" class="print-contact">
+                                电话: ${resumeData.personal.phone} | 邮箱: ${resumeData.personal.emailUser}@${resumeData.personal.emailDomain}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="experience" class="glass-card">
+                    <h2 class="section-title">履历轨迹</h2>
+                    <div class="tabs" role="tablist" aria-label="经历分类">
+                        <button class="tab-btn" role="tab" aria-selected="true" aria-controls="panel-work" id="tab-work">正式工作</button>
+                        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-intern" id="tab-intern">实习经历</button>
+                        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-campus" id="tab-campus">校园经历</button>
+                    </div>
+                    
+                    <div id="panel-work" class="tab-panel active" role="tabpanel" aria-labelledby="tab-work">
+                        ${renderTimeline(resumeData.experience.work)}
+                    </div>
+                    <div id="panel-intern" class="tab-panel" role="tabpanel" aria-labelledby="tab-intern">
+                        ${renderTimeline(resumeData.experience.intern)}
+                    </div>
+                    <div id="panel-campus" class="tab-panel" role="tabpanel" aria-labelledby="tab-campus">
+                        ${renderTimeline(resumeData.experience.campus)}
+                    </div>
+                </section>
+
+                <section id="projects" class="glass-card">
+                    <h2 class="section-title">核心项目</h2>
+                    <div class="project-grid">
+                        ${resumeData.projects.map(p => `
+                            <div class="project-card">
+                                <div class="project-title">${p.name}</div>
+                                <div class="flex-wrap" style="margin-bottom:10px;">
+                                    ${p.tech.map(t => `<span class="badge" style="font-size:0.75rem;">${t}</span>`).join('')}
+                                </div>
+                                <div class="project-desc">${p.desc}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </section>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                    <section id="skills" class="glass-card" style="margin-bottom:0;">
+                        <h2 class="section-title">技能矩阵</h2>
+                        ${Object.entries(resumeData.skills).map(([name, data]) => `
+                            <div class="skill-group">
+                                <div style="display:flex; justify-content:space-between;">
+                                    <h4>${name}</h4>
+                                </div>
+                                <div class="skill-bar-container no-print">
+                                    <div class="skill-bar" style="width: ${data.val}%"></div>
+                                </div>
+                                <p style="font-size:0.85rem; color:var(--text-muted);">${data.text}</p>
+                            </div>
+                        `).join('')}
+                    </section>
+
+                    <section id="education" class="glass-card" style="margin-bottom:0;">
+                        <h2 class="section-title">教育与荣誉</h2>
+                        <div class="timeline-item" style="border:none;">
+                            <div class="timeline-header">
+                                <span class="timeline-title">${resumeData.education[0].school}</span>
+                                <span class="timeline-date">${resumeData.education[0].period}</span>
+                            </div>
+                            <div style="color:var(--accent); font-weight:bold; margin-bottom:5px;">${resumeData.education[0].major}</div>
+                            <p style="font-size:0.9rem; color:var(--text-muted); margin-bottom:5px;">${resumeData.education[0].gpa}</p>
+                            <p style="font-size:0.85rem; color:var(--text-muted); margin-bottom:15px;">核心课程: ${resumeData.education[0].courses}</p>
+                        </div>
+                        <h4 style="margin-bottom:10px; color:var(--text-main);">竞赛奖项</h4>
+                        <ul style="padding-left:15px; font-size:0.85rem; color:var(--text-muted);">
+                            ${resumeData.competitions.map(c => `<li style="margin-bottom:5px;">${c}</li>`).join('')}
+                        </ul>
+                    </section>
+                </div>
+            </main>
+
+            <footer>
+                <div class="container">
+                    <p>© 2026 ${resumeData.personal.name} | AI & Frontend. Designed with Metaphysical Tech Vibe.</p>
+                </div>
+            </footer>
+        `;
+
+        // 修复打印时联系方式的显示
+        const style = document.createElement('style');
+        style.innerHTML = `@media print { .print-contact { display: block !important; margin-top:10px; font-weight:bold; } }`;
+        document.head.appendChild(style);
+
+        bindTabs();
+        initMatrixRain();
+    }
+
+    function renderTimeline(items) {
+        return items.map(item => `
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <div>
+                        <span class="timeline-title">${item.company}</span>
+                        <div class="timeline-subtitle">${item.role}</div>
+                    </div>
+                    <span class="timeline-date">${item.period}</span>
+                </div>
+                <div class="timeline-content">
+                    <ul>
+                        ${item.desc.map(d => `<li>${d}</li>`).join('')}
                     </ul>
                 </div>
-            `;
-        }
+            </div>
+        `).join('');
+    }
 
-        function switchTab(e, id) {
-            const container = e.target.closest('.tabs-container');
-            container.querySelectorAll('.tab-trigger').forEach(b => b.classList.remove('active'));
-            container.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            e.target.classList.add('active');
-            document.getElementById(id).classList.add('active');
-        }
+    // ---------------------------------------------------------
+    // 3. 交互逻辑
+    // ---------------------------------------------------------
+    
+    // Tab 切换逻辑 (支持键盘)
+    function bindTabs() {
+        const tabs = document.querySelectorAll('[role="tab"]');
+        const panels = document.querySelectorAll('[role="tabpanel"]');
 
-        function toggleTheme() {
-            document.body.classList.toggle('dark-mode');
-            document.body.classList.toggle('light-mode');
-        }
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => switchTab(tab, tabs, panels));
+            tab.addEventListener('keydown', e => {
+                let index = Array.from(tabs).indexOf(tab);
+                if (e.key === 'ArrowRight') {
+                    index = (index + 1) % tabs.length;
+                    tabs[index].focus();
+                    switchTab(tabs[index], tabs, panels);
+                } else if (e.key === 'ArrowLeft') {
+                    index = (index - 1 + tabs.length) % tabs.length;
+                    tabs[index].focus();
+                    switchTab(tabs[index], tabs, panels);
+                }
+            });
+        });
+    }
 
-        function copyEmail() {
-            const email = resume.contact.email;
-            navigator.clipboard.writeText(email);
+    function switchTab(selectedTab, allTabs, allPanels) {
+        allTabs.forEach(t => t.setAttribute('aria-selected', 'false'));
+        allPanels.forEach(p => p.classList.remove('active'));
+        
+        selectedTab.setAttribute('aria-selected', 'true');
+        document.getElementById(selectedTab.getAttribute('aria-controls')).classList.add('active');
+    }
+
+    // 邮箱防爬虫拼接复制
+    function copyEmail() {
+        const email = resumeData.personal.emailUser + '@' + resumeData.personal.emailDomain;
+        navigator.clipboard.writeText(email).then(() => {
             alert('邮箱已复制: ' + email);
+        }).catch(err => {
+            prompt('请手动复制:', email);
+        });
+    }
+
+    // 主题切换
+    function toggleTheme() {
+        const body = document.body;
+        if (body.getAttribute('data-theme') === 'light') {
+            body.removeAttribute('data-theme');
+        } else {
+            body.setAttribute('data-theme', 'light');
+        }
+    }
+
+    // ---------------------------------------------------------
+    // 4. Matrix Rain Vanilla JS 实现 (科技玄学风)
+    // ---------------------------------------------------------
+    function initMatrixRain() {
+        const canvas = document.getElementById('matrix-canvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        // 融合二进制与易经天干地支五行
+        const characters = '01甲乙丙丁戊己庚辛壬癸子丑寅卯辰巳午未申酉戌亥乾坤震巽坎离艮兑';
+        const chars = characters.split('');
+        const fontSize = 16;
+        let drops = [];
+
+        function resizeCanvas() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            const columns = Math.floor(width / fontSize);
+            drops = [];
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.random() * -100; // 随机初始高度打乱
+            }
         }
 
-        window.onscroll = function() {
-            const btn = document.getElementById('scrollTop');
-            btn.style.display = window.scrollY > 500 ? 'block' : 'none';
-        };
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-        render();
-    </script>
+        function draw() {
+            const isLight = document.body.getAttribute('data-theme') === 'light';
+            
+            // 背景褪色效果 (形成拖尾)
+            ctx.fillStyle = isLight ? 'rgba(244, 244, 249, 0.1)' : 'rgba(5, 5, 5, 0.1)';
+            ctx.fillRect(0, 0, width, height);
+
+            // 字体颜色
+            ctx.fillStyle = isLight ? '#008f11' : '#00ff41';
+            ctx.font = `${fontSize}px "Consolas", monospace`;
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                
+                // 绘制字符
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                // 随机重置到底部之上
+                if (drops[i] * fontSize > height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i] += 1;
+            }
+        }
+
+        setInterval(draw, 33);
+    }
+
+    // 初始化运行
+    document.addEventListener('DOMContentLoaded', initApp);
+
+</script>
 </body>
 </html>
