@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>徐浩铭 | 个人简历 - AI硬件产品经理 & 资深运营</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --accent: #22d3ee;
+            --bg: #ffffff;
+            --text: #1f2937;
+            --subtext: #4b5563;
+            --card-bg: #f9fafb;
+            --border: #e5e7eb;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #030712;
+                --text: #f3f4f6;
+                --subtext: #9ca3af;
+                --card-bg: #111827;
+                --border: #374151;
+            }
+        }
+
+        body.dark-mode {
+            --bg: #030712;
+            --text: #f3f4f6;
+            --subtext: #9ca3af;
+            --card-bg: #111827;
+            --border: #374151;
+        }
+        
+        body.light-mode {
+            --bg: #ffffff;
+            --text: #1f2937;
+            --subtext: #4b5563;
+            --card-bg: #f9fafb;
+            --border: #e5e7eb;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: var(--transition);
+        }
+
+        /* Mystical Tech Background */
+        .bg-canvas {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.05) 0%, transparent 50%);
+            opacity: 0.6;
+        }
+
+        /* Header & Nav */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(var(--bg), 0.8);
+            backdrop-filter: blur(12px);
+            z-index: 100;
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0.75rem 1.25rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-brand { font-weight: 800; font-size: 1.25rem; letter-spacing: -0.025em; background: linear-gradient(to right, var(--primary), var(--secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .nav-actions { display: flex; gap: 1rem; align-items: center; }
+        
+        .btn-icon {
+            background: none; border: 1px solid var(--border); color: var(--text);
+            padding: 0.5rem; border-radius: 0.5rem; cursor: pointer; transition: var(--transition);
+        }
+        .btn-icon:hover { background: var(--border); }
+
+        /* Container */
+        main { max-width: 800px; margin: 5rem auto 2rem; padding: 0 1.25rem; }
+
+        /* Hero Section */
+        .hero { text-align: center; padding: 3rem 0; animation: fadeIn 0.8s ease-out; }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .hero p { color: var(--subtext); max-width: 500px; margin: 0 auto 1.5rem; }
+        
+        .badge-group { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; }
+        .badge {
+            padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 500;
+            background: var(--card-bg); border: 1px solid var(--border); color: var(--primary);
+        }
+
+        /* Section Styling */
+        section { margin-bottom: 4rem; scroll-margin-top: 6rem; }
+        h2 { font-size: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        h2::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+        /* Highlights Grid */
+        .grid-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; }
+        .stat-card {
+            background: var(--card-bg); border: 1px solid var(--border); padding: 1.5rem; border-radius: 1rem;
+            text-align: center; transition: var(--transition); position: relative; overflow: hidden;
+        }
+        .stat-card:hover { transform: translateY(-5px); border-color: var(--primary); }
+        .stat-val { display: block; font-size: 1.75rem; font-weight: 800; color: var(--primary); }
+        .stat-label { font-size: 0.875rem; color: var(--subtext); }
+
+        /* Tabs Interface */
+        .tabs-container { margin-bottom: 1.5rem; }
+        .tabs-list {
+            display: flex; gap: 0.5rem; border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem; overflow-x: auto;
+        }
+        .tab-trigger {
+            padding: 0.5rem 1rem; border: none; background: none; color: var(--subtext);
+            cursor: pointer; font-weight: 600; white-space: nowrap; transition: var(--transition);
+            border-radius: 0.5rem;
+        }
+        .tab-trigger.active { background: var(--primary); color: white; }
+        .tab-content { display: none; padding-top: 1.5rem; animation: slideUp 0.4s ease-out; }
+        .tab-content.active { display: block; }
+
+        /* Experience/Project Card */
+        .exp-item {
+            position: relative; padding-left: 1.5rem; border-left: 2px solid var(--border);
+            margin-bottom: 2rem; transition: var(--transition);
+        }
+        .exp-item:hover { border-left-color: var(--primary); }
+        .exp-dot {
+            position: absolute; left: -7px; top: 0; width: 12px; height: 12px;
+            background: var(--bg); border: 2px solid var(--primary); border-radius: 50%;
+        }
+        .exp-header { display: flex; justify-content: space-between; flex-wrap: wrap; margin-bottom: 0.5rem; }
+        .exp-title { font-weight: 700; color: var(--text); }
+        .exp-meta { font-size: 0.875rem; color: var(--subtext); }
+        .exp-desc { font-size: 0.9375rem; color: var(--subtext); margin-top: 0.5rem; }
+        .exp-desc li { margin-left: 1.25rem; margin-bottom: 0.25rem; }
+
+        /* Skill Grid */
+        .skill-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
+        .skill-category h4 { font-size: 0.9rem; color: var(--primary); text-transform: uppercase; margin-bottom: 0.75rem; }
+        .skill-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+        /* Footer */
+        footer { text-align: center; padding: 4rem 0 2rem; border-top: 1px solid var(--border); font-size: 0.875rem; color: var(--subtext); }
+
+        /* Animations */
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Print Style */
+        @media print {
+            header, .btn-icon, .tabs-list, footer { display: none !important; }
+            body { background: white; color: black; font-size: 10pt; }
+            main { margin-top: 0; }
+            .tab-content { display: block !important; opacity: 1 !important; }
+            .exp-item { page-break-inside: avoid; }
+            section { margin-bottom: 1.5rem; }
+        }
+
+        /* Scroll Top */
+        #scrollTop {
+            position: fixed; bottom: 2rem; right: 2rem; display: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-canvas" id="canvas"></div>
+    
+    <header>
+        <nav>
+            <div class="nav-brand">徐浩铭</div>
+            <div class="nav-actions">
+                <button class="btn-icon" onclick="toggleTheme()" title="切换主题">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                </button>
+                <button class="btn-icon" onclick="window.print()" title="打印 PDF">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main id="app">
+        <!-- JS will render content here -->
+    </main>
+
+    <button id="scrollTop" class="btn-icon" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+
+    <footer>
+        <p>&copy; 2024 徐浩铭. Updated May 2024. Created with Vanilla JS.</p>
+    </footer>
+
+    <script>
+        const resume = {
+            name: "徐浩铭",
+            title: "AI 硬件产品经理 | 资深新媒体运营",
+            summary: "24岁，黑龙江科技大学本科毕业。现任浙江湃启科技有限公司AI硬件产品经理，擅长结合硬核技术背景与敏锐的内容嗅觉，驱动AI应用落地。具备从0到1的新媒体运营与商务活动策划能力。",
+            contact: {
+                phone: "13796576266",
+                email: "526256317@qq.com",
+                location: "浙江 / 杭州"
+            },
+            highlights: [
+                { val: "3.6/4.0", label: "专业绩点" },
+                { val: "10k+", label: "社群运营规模" },
+                { val: "9/120", label: "专业排名" },
+                { val: "AI+", label: "硬件落地经验" }
+            ],
+            experience: {
+                work: [
+                    {
+                        company: "浙江湃启科技有限公司",
+                        role: "AI 硬件产品经理",
+                        date: "2024.03 - 至今",
+                        desc: [
+                            "负责公司AI硬件产品的规划与定义，对齐市场需求与技术可行性",
+                            "兼任新媒体运营主管，通过内容矩阵提升品牌声量及技术认知度",
+                            "主导商务对接与大型活动，成功拓展多个行业合作伙伴"
+                        ]
+                    },
+                    {
+                        company: "树成林教育科技有限公司",
+                        role: "新媒体运营 (实习)",
+                        date: "2023.07 - 2023.08",
+                        desc: [
+                            "全链路负责售前咨询与成交，精准解析课程体系，优化备考路径",
+                            "通过精细化运营，有效提升用户转化率与课程成交效率",
+                            "处理售后反馈，归纳各阶段学习痛点，反哺课程内容迭代"
+                        ]
+                    }
+                ],
+                campus: [
+                    {
+                        company: "黑龙江科技大学 - 校科协",
+                        role: "人工智能协会会长",
+                        date: "2022.09 - 2024.09",
+                        desc: [
+                            "负责协会公众号运营，获评校内“最佳协会公众号”",
+                            "组织多次校级科技竞赛，负责硬件调试与软件协作管理",
+                            "管理勤工助学部门公众号，策划多场公益及抗疫志愿者活动"
+                        ]
+                    }
+                ]
+            },
+            projects: [
+                {
+                    name: "AI 零代码应用生成平台",
+                    tech: "AI Agent / 可视化架构",
+                    date: "2023.07 - 2024.03",
+                    desc: "协助开发多种模式应用生成、持久化对话记忆等核心功能。"
+                },
+                {
+                    name: "AI 爆款文章创作平台",
+                    tech: "多模态生成 / 工作流编排",
+                    date: "2023.07 - 2024.03",
+                    desc: "基于多智能体协作，实现几分钟生成配图丰富的专业文章。"
+                },
+                {
+                    name: "油田自动抽油系统 (互联网+)",
+                    tech: "嵌入式 / 自动控制",
+                    date: "竞赛项目",
+                    desc: "获省级三等奖，负责策划书编写、PPT制作及部分硬件测试。"
+                }
+            ],
+            skills: [
+                { category: "技术架构", items: ["嵌入式系统", "单片机开发", "AI Agent 编排", "Vibe Coding"] },
+                { category: "产品运营", items: ["内容策略", "商务对接", "用户增长", "活动策划"] },
+                { category: "工具栈", items: ["Python", "C Language", "Product Management Tools", "AI Workflow"] }
+            ],
+            education: {
+                school: "黑龙江科技大学",
+                major: "测控技术与仪器 (本科)",
+                date: "2021.09 - 2025.06",
+                awards: ["CET-4 (524)", "CET-6 (503)", "3D打印证书", "计算机等级证书"]
+            }
+        };
+
+        function render() {
+            const app = document.getElementById('app');
+            app.innerHTML = `
+                <section class="hero">
+                    <h1>${resume.name}</h1>
+                    <div class="badge-group">
+                        <span class="badge">${resume.title}</span>
+                    </div>
+                    <p>${resume.summary}</p>
+                    <div class="badge-group">
+                        <span class="badge" style="cursor:pointer" onclick="copyEmail()">${resume.contact.email}</span>
+                        <span class="badge">${resume.contact.phone}</span>
+                        <span class="badge">${resume.contact.location}</span>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="grid-stats">
+                        ${resume.highlights.map(h => `
+                            <div class="stat-card">
+                                <span class="stat-val">${h.val}</span>
+                                <span class="stat-label">${h.label}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </section>
+
+                <section id="experience">
+                    <h2>工作与实习</h2>
+                    <div class="tabs-container">
+                        <div class="tabs-list">
+                            <button class="tab-trigger active" onclick="switchTab(event, 'work')">职业经历</button>
+                            <button class="tab-trigger" onclick="switchTab(event, 'campus')">校园实践</button>
+                        </div>
+                        <div id="work" class="tab-content active">
+                            ${resume.experience.work.map(renderExp).join('')}
+                        </div>
+                        <div id="campus" class="tab-content">
+                            ${resume.experience.campus.map(renderExp).join('')}
+                        </div>
+                    </div>
+                </section>
+
+                <section id="projects">
+                    <h2>核心项目</h2>
+                    ${resume.projects.map(p => `
+                        <div class="exp-item">
+                            <div class="exp-dot"></div>
+                            <div class="exp-header">
+                                <span class="exp-title">${p.name}</span>
+                                <span class="exp-meta">${p.date}</span>
+                            </div>
+                            <div class="exp-meta" style="color: var(--primary)">${p.tech}</div>
+                            <div class="exp-desc">${p.desc}</div>
+                        </div>
+                    `).join('')}
+                </section>
+
+                <section id="skills">
+                    <h2>能力矩阵</h2>
+                    <div class="skill-grid">
+                        ${resume.skills.map(s => `
+                            <div class="skill-category">
+                                <h4>${s.category}</h4>
+                                <div class="skill-list">
+                                    ${s.items.map(item => `<span class="badge">${item}</span>`).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </section>
+
+                <section id="edu">
+                    <h2>教育背景</h2>
+                    <div class="exp-item">
+                        <div class="exp-dot"></div>
+                        <div class="exp-header">
+                            <span class="exp-title">${resume.education.school}</span>
+                            <span class="exp-meta">${resume.education.date}</span>
+                        </div>
+                        <div class="exp-meta">${resume.education.major}</div>
+                        <div class="exp-desc">
+                            荣誉/证书：${resume.education.awards.join(' / ')}
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+
+        function renderExp(exp) {
+            return `
+                <div class="exp-item">
+                    <div class="exp-dot"></div>
+                    <div class="exp-header">
+                        <span class="exp-title">${exp.company}</span>
+                        <span class="exp-meta">${exp.date}</span>
+                    </div>
+                    <div class="exp-meta" style="font-weight: 600;">${exp.role}</div>
+                    <ul class="exp-desc">
+                        ${exp.desc.map(d => `<li>${d}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+
+        function switchTab(e, id) {
+            const container = e.target.closest('.tabs-container');
+            container.querySelectorAll('.tab-trigger').forEach(b => b.classList.remove('active'));
+            container.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            e.target.classList.add('active');
+            document.getElementById(id).classList.add('active');
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            document.body.classList.toggle('light-mode');
+        }
+
+        function copyEmail() {
+            const email = resume.contact.email;
+            navigator.clipboard.writeText(email);
+            alert('邮箱已复制: ' + email);
+        }
+
+        window.onscroll = function() {
+            const btn = document.getElementById('scrollTop');
+            btn.style.display = window.scrollY > 500 ? 'block' : 'none';
+        };
+
+        render();
+    </script>
+</body>
+</html>
